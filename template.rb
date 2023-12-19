@@ -1,4 +1,4 @@
-# rails new blog -m ~/template.rb
+# rails new blog -m ./template.rb
 
 
 def add_gem(name, *options)
@@ -18,10 +18,13 @@ def add_home
   route "root to: 'home#index'"
 end
 
-def add_rspec
+def add_tests
   gem_group :development, :test do
     add_gem "rspec-rails"
+    add_gem "factory_bot_rails"
+    add_gem 'faker'
   end
+  run "bundle install"
   generate 'rspec:install'
 end
 
@@ -31,6 +34,7 @@ end
 
 add_home
 add_devise
-add_rspec
+add_tests
 
 generate(:scaffold, "article", "title:string")
+

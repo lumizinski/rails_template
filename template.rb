@@ -13,4 +13,24 @@ def add_devise
   generate :devise, 'User', 'username:string:uniq', 'admin:boolean'
 end
 
+def add_home
+  generate(:controller, "home", "index", "blog", "contact")
+  route "root to: 'home#index'"
+end
+
+def add_rspec
+  gem_group :development, :test do
+    add_gem "rspec-rails"
+  end
+  generate 'rspec:install'
+end
+
+def gem_exists?(name)
+  IO.read("Gemfile") =~ /ˆ\s*gem ['"]#{name}['"]/
+end
+
+add_home
+add_devise
+add_rspec
+
 generate(:scaffold, "article", "title:string")

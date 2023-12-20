@@ -22,6 +22,12 @@ def add_home
   route "root to: 'home#index'"
 end
 
+def add_rails_admin
+  add_gem 'rails_admin', '~> 3.0'
+  run "bundle install"
+  generate "rails_admin:install"
+end
+
 def add_tests
   gem_group :development, :test do
     add_gem "rspec-rails"
@@ -39,6 +45,7 @@ end
 add_home
 add_login
 add_tests
+add_rails_admin
 
 generate(:scaffold, "article", "title:string")
 
